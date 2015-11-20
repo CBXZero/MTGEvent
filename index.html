@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html ng-app="EventApp">
+	
+	<head>
+		<title> Event Manager </title>
+		<link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	</head>
+	
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<h4 style="color: white;">Magic Event Runner</h4>
+				</div>
+				
+			</div>
+		</nav>	
+		
+		<div ng-controller="EventController as event">
+			<div class="col-sm-3 col-md-3" style="border-style: solid;">
+				<p style="font-size: 250%">{{timer.time.minutes | timeFormat:2}} : {{timer.time.seconds | timeFormat:2}}</p>
+				<button class="btn btn-default" ng-click="timer.paused = true">Pause</button>
+				<button class="btn btn-default" ng-click="timer.paused = false">Un-Pause</button>
+				<button class="btn btn-default" ng-click="timer.setTime(50)">Set 50 Minutes</button>
+				<button class="btn btn-default" ng-click="timer.setTime(1)">Set 1 minute</button>
+			</div>
+			
+			
+				
+			<div class="col-sm-3 col-md-3">
+				<div ng-repeat="player in players">
+					<p>{{player.name}} - {{player.score | number}} <button class="btn btn-default" ng-click="removePlayer(player)">Remove</button></p>
+				</div>
+			</div>
+			
+			<div class="col-sm-3 col-md-3" ng-controller="PlayerController as playerCtrl">
+			
+				<form name="playerForm" ng-submit="playerCtrl.addPlayer(players)">
+					<p>{{player.name}}</p>
+					<input type="text" class="form-control" ng-model="player.name">
+					<input class="btn btn-default" type="submit">
+				</form>
+			
+			</div>
+			
+			<button class="btn btn-default" ng-click="generatePairings()">Pairings</button>
+			<button class="btn btn-default" ng-click="generateSeating()">Seating</button>
+			
+			<div class="col-sm-3 col-md-3">
+				<div ng-repeat="pairing in pairings">
+					<div>
+						<span>{{pairing.player1.name}} vs {{pairing.player2.name}}</span> <input type="text" class="form-control" ng-model="pairing.score1"> - <input type="text" class="form-control" ng-model="pairing.score2"> 
+					</div>
+				</div>
+				
+				<button class="btn btn-default" ng-click="saveScores()">Save</button>
+			</div>
+		</div>
+		
+		<script src="angular.min.js"></script>
+		<script src="app.js"></script>
+		<script>
+			
+		</script>
+	</body>
+	
+</html>
